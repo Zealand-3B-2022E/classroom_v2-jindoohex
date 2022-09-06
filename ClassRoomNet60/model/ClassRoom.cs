@@ -48,6 +48,22 @@ namespace ClassRoomNet60.model
         #endregion
 
         #region Methods
+        public void FindSeasonalBirth()
+        {
+            var seasonalListing =
+                this._studentList.GroupBy(x => x.Season())
+                .Select(seasonalGroup => new
+                {
+                    seasonalPeriod = seasonalGroup.Key,
+                    countSeasonalPeriod = seasonalGroup.Count()
+                });
+
+            foreach (var item in seasonalListing)
+            {
+                Console.WriteLine($"Season: {item.seasonalPeriod}\nCount: {item.countSeasonalPeriod}");
+            }
+        }
+
         public override string ToString()
         {
             return $"{nameof(ClassName)}: {ClassName}, {nameof(SemesterStart)}: {SemesterStart.Day}/{SemesterStart.Month}-{SemesterStart.Year}";

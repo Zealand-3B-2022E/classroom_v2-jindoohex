@@ -10,26 +10,32 @@ namespace ClassRoomNet60.model
     {
         #region Instance Fields
         private string _name;
-		private int _birthDay;
-		private int _birthMonth;
+        private int _birthDay;
+        private int _birthMonth;
         #endregion
 
         #region Properties
         public string Name
-		{
-			get { return _name; }
-			private set { _name = value; }
-		}
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
 
         public int BirthDay
         {
             get { return _birthDay; }
-            private set { _birthDay = value; }
+            set { _birthDay = value; }
         }
         public int BirthMonth
         {
             get { return _birthMonth; }
-            private set { _birthMonth = value; }
+            set
+            {
+                if (value >= 1 && value <= 12)
+                    _birthMonth = value;
+                else
+                    throw new ArgumentException($"You have entered an invalid seasonal month, acceptable values are 1-12. You typed: {value}");
+            }
         }
         #endregion
 
@@ -43,9 +49,35 @@ namespace ClassRoomNet60.model
         #endregion
 
         #region Methods
+        public string Season()
+        {
+            switch (_birthMonth)
+            {
+                case 1:
+                case 2:
+                case 12:
+                    return "Winter";
+                case 3:
+                case 4:
+                case 5:
+                    return "Spring";
+                case 6:
+                case 7:
+                case 8:
+                    return "Summer";
+                case 9:
+                case 10:
+                case 11:
+                    return "Autumn";
+                default:
+                    return $"This month: {BirthMonth} are not in the interval: 1-12";
+
+            }
+        }
+
         public override string ToString()
         {
-            return $"{nameof(Name)}: {Name}, {nameof(BirthDay)}: {BirthDay}, {nameof(BirthMonth)}: {BirthMonth}";
+            return $"{nameof(Name)}: {Name}, {nameof(BirthDay)}: {BirthDay}, {nameof(BirthMonth)}: {BirthMonth}, Season: {Season()}";
         }
         #endregion
     }
