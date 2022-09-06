@@ -19,7 +19,9 @@ namespace ClassRoomNet60
         public void Start()
         {
             ClassRoom theClassRoom = new ClassRoom("Zealand-3B", new DateTime(2022, 9, 1));
+            Console.WriteLine();
             Console.WriteLine(theClassRoom.ToString());
+            Console.WriteLine();
             foreach (var Student in theClassRoom.StudentList)
             {
                 Console.WriteLine(Student.ToString());
